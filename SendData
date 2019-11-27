@@ -1,0 +1,16 @@
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
+
+# Fetch the service account key JSON file contents
+cred = credentials.Certificate('firebase cred json')
+# Initialize the app with a service account, granting admin privileges
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'Your DB-url'
+})
+
+ref = db.reference('/')
+def uploadList(l):
+	ref.update({'LPG' : l['GAS_LPG']})
+	ref.update({'CO' : l['CO']})
+	ref.update({'SMOKE' : l['SMOKE']})
